@@ -21,6 +21,8 @@ Adds a configurable "Email Templates" model for the Sign module.
         'views/sign_send_request_views.xml',
         'data/mail_templates.xml',
     ],
+    'installable': True,
+    'auto_install': False,
     'license': 'LGPL-3',
-    'author': 'ZenCore',
+    'application': False,
 }
