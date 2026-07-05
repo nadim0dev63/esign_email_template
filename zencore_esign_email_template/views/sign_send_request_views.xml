@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sign_send_request_view_form_inherit_email_template" model="ir.ui.view">
+        <field name="name">sign.send.request.view.form.inherit.zencore.email.template</field>
+        <field name="model">sign.send.request</field>
+        <field name="inherit_id" ref="sign.sign_send_request_view_form"/>
+        <field name="arch" type="xml">
+            <!-- reminder_enabled/reminder live inside this div; insert right after it -->
+            <xpath expr="//field[@name='reminder_enabled']/ancestor::div[1]" position="after">
+                <field name="email_template_id" placeholder="Default design" options="{'no_create': True}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

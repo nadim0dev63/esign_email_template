@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Extends Odoo's stock "sign_template_mail_request" template.
+        Nothing from the default template is removed or reordered:
+        greeting, per-request message box, "Sign document" button,
+        validity note, warning, terms all stay exactly as shipped.
+        We only ADD three optional blocks driven by
+        record.sign_request_id.email_template_id (header/body/footer),
+        so the button visually stays "in the middle" like default.
+    -->
+    <template id="sign_template_mail_request_inherit_zencore"
+              inherit_id="sign.sign_template_mail_request">
+
+        <!-- HEADER: above the default "Hello ..." greeting -->
+        <xpath expr="//table/tr[1]" position="before">
+            <tr t-if="record.sign_request_id.email_template_id and record.sign_request_id.email_template_id.header">
+                <td valign="top">
+                    <t t-out="record.sign_request_id.email_template_id.header"/>
+                </td>
+            </tr>
+        </xpath>
+
+        <!-- BODY: extra content just above the "Sign document" button -->
+        <xpath expr="//a[@t-att-href='link']/ancestor::tr[1]" position="before">
+            <tr t-if="record.sign_request_id.email_template_id and record.sign_request_id.email_template_id.body">
+                <td valign="top">
+                    <div style="margin: 16px 0px 16px 0px;">
+                        <t t-out="record.sign_request_id.email_template_id.body"/>
+                    </div>
+                </td>
+            </tr>
+        </xpath>
+
+        <!-- FOOTER: after the standard security warning, before Terms -->
+        <xpath expr="//strong[text()='Warning']/ancestor::tr[1]" position="after">
+            <tr t-if="record.sign_request_id.email_template_id and record.sign_request_id.email_template_id.footer">
+                <td valign="top">
+                    <t t-out="record.sign_request_id.email_template_id.footer"/>
+                </td>
+            </tr>
+        </xpath>
+
+    </template>
+</odoo>

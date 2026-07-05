@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sign_email_template_manager,sign.email.template.manager,model_sign_email_template,sign.group_sign_manager,1,1,1,1
+access_sign_email_template_user,sign.email.template.user,model_sign_email_template,sign.group_sign_user,1,0,0,0

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sign_email_template_view_list" model="ir.ui.view">
+        <field name="name">sign.email.template.view.list</field>
+        <field name="model">sign.email.template</field>
+        <field name="arch" type="xml">
+            <list string="Email Templates">
+                <field name="name"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="sign_email_template_view_form" model="ir.ui.view">
+        <field name="name">sign.email.template.view.form</field>
+        <field name="model">sign.email.template</field>
+        <field name="arch" type="xml">
+            <form string="Email Template">
+                <sheet>
+                    <div class="alert alert-info" role="alert">
+                        <field name="preview_note" readonly="1" nolabel="1"/>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="active" invisible="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Header">
+                            <field name="header" options="{'style-inline': true}"/>
+                        </page>
+                        <page string="Body">
+                            <field name="body" options="{'style-inline': true}"/>
+                        </page>
+                        <page string="Footer">
+                            <field name="footer" options="{'style-inline': true}"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="sign_email_template_action" model="ir.actions.act_window">
+        <field name="name">Email Templates</field>
+        <field name="res_model">sign.email.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first email template
+            </p>
+            <p>
+                Design a reusable header/body/footer for signature request emails.
+                The "Sign document" button and security warning stay unchanged.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="sign_email_template_menu"
+              name="Email Templates"
+              parent="sign.menu_sign_configuration"
+              action="sign_email_template_action"
+              groups="sign.group_sign_manager"
+              sequence="30"/>
+
+</odoo>
